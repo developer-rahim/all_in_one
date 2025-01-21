@@ -1,7 +1,6 @@
 import 'package:all_in_one/src/core/navigation/router_configuration.dart';
 import 'package:all_in_one/src/core/service/cache/cache_service.dart';
 import 'package:all_in_one/src/core/theme/theme.dart';
-import 'package:all_in_one/src/core/utils/strings.dart';
 import 'package:all_in_one/src/core/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
@@ -17,7 +16,6 @@ Future<void> main() async {
   usePathUrlStrategy();
   GoRouter.optionURLReflectsImperativeAPIs = true;
   WidgetsFlutterBinding.ensureInitialized();
-
   await CacheService().initialize();
   runApp(
     const MyApp(),
@@ -36,14 +34,13 @@ class MyApp extends StatelessWidget {
       key: UniqueKey(),
       scaffoldMessengerKey: SnackBarService.scaffoldKey,
       debugShowCheckedModeBanner: false,
-      title: AppStrings.appName,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,
       //routerConfig: router,
       builder: (_, router) {
         return MediaQuery(
-          data: MediaQuery.of(_).copyWith(
+          data: MediaQuery.of(context).copyWith(
             textScaler: const TextScaler.linear(1.0),
           ),
           child: router!,
